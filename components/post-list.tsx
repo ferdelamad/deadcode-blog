@@ -15,7 +15,8 @@ export const PostList = ({ posts, showCategory = true }: PostListProps) => {
 
   const handlePostClick = (slug: string, id: string) => {
     setClickedId(id)
-    router.push(`/blog/${slug}`)
+    // Immediate navigation
+    router.push(`/blog/${slug}`, { scroll: false })
   }
 
   return (
@@ -24,7 +25,7 @@ export const PostList = ({ posts, showCategory = true }: PostListProps) => {
         <article 
           key={post.id} 
           onClick={() => handlePostClick(post.slug, post.id)}
-          className={`group relative flex flex-col space-y-2 cursor-pointer transition-opacity ${
+          className={`group relative flex flex-col space-y-2 cursor-pointer transition-all duration-200 hover:scale-[1.01] ${
             clickedId && clickedId !== post.id ? 'opacity-50' : ''
           }`}
         >
