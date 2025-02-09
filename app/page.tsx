@@ -1,54 +1,92 @@
-import Link from "next/link"
 import { getPosts } from "@/lib/posts"
+import { PostList } from "@/components/post-list"
+import Link from "next/link"
+import { ArrowRight, Code2, Sparkles } from "lucide-react"
 
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function Home() {
   const posts = await getPosts()
+  const recentPosts = posts.slice(0, 5) // Get only the 5 most recent posts
 
   return (
     <div className="container py-10">
-      <div className="flex flex-col space-y-8 max-w-2xl mx-auto">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Stories</h1>
-          <p className="text-muted-foreground">
-            {new Date().toLocaleDateString('en-US', { 
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })} · {posts.length} stories
-          </p>
+      <div className="flex flex-col space-y-16 max-w-2xl mx-auto">
+        {/* Hero Section */}
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Code2 className="h-4 w-4" />
+              <span>Software Development & Best Practices</span>
+            </div>
+            <h3 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Hey, I'm Fernando 👋
+            </h3>
+            <p className="text-lg text-muted-foreground">
+              Welcome to Dead Code, where I write about software development, 
+              best practices, and my journey as a developer. I focus on React, 
+              TypeScript, and modern web development.
+            </p>
+          </div>
+
+          {/* Quick Links or Featured Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+            <Link 
+              href="/blog"
+              className="group relative overflow-hidden rounded-lg border p-4 hover:border-foreground/50 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <h4 className="font-medium">Blog Posts</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Check out all my articles
+                  </p>
+                </div>
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Link>
+            <Link 
+              href="/about"
+              className="group relative overflow-hidden rounded-lg border p-4 hover:border-foreground/50 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <h4 className="font-medium">About Dead Code</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Learn more about this blog
+                  </p>
+                </div>
+                <Sparkles className="h-5 w-5 transition-transform group-hover:scale-110" />
+              </div>
+            </Link>
+          </div>
         </div>
-        <div className="grid gap-10">
-          {posts.map((post) => (
-            <article key={post.id} className="group relative flex flex-col space-y-2">
-              <div className="text-sm text-muted-foreground uppercase">
-                {post.category}
-              </div>
-              <h2 className="text-2xl font-semibold">{post.title}</h2>
-              {post.excerpt && (
-                <p className="text-muted-foreground">{post.excerpt}</p>
-              )}
-              <div className="flex items-center space-x-4 text-sm">
-                <time className="text-muted-foreground">
-                  {new Date(post.published_at).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-                {post.reading_time && (
-                  <>
-                    <span className="text-muted-foreground">·</span>
-                    <span className="text-muted-foreground">{post.reading_time}</span>
-                  </>
-                )}
-              </div>
-              <Link href={`/blog/${post.slug}`} className="absolute inset-0">
-                <span className="sr-only">View Article</span>
-              </Link>
-            </article>
-          ))}
+
+        {/* Divider */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <span className="bg-background px-2 text-xs text-muted-foreground">
+              RECENT POSTS
+            </span>
+          </div>
+        </div>
+
+        {/* Recent Posts Section */}
+        <div className="space-y-8">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold tracking-tight">Latest Articles</h2>
+            <Link 
+              href="/blog" 
+              className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all posts
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+          <PostList posts={recentPosts} showCategory={false} />
         </div>
       </div>
     </div>
