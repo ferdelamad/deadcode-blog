@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
 import type { Components } from "react-markdown"
@@ -8,6 +9,7 @@ import rehypeRaw from "rehype-raw"
 import rehypeSanitize from "rehype-sanitize"
 import { BackButton } from "@/components/back-button"
 import { getPostBySlug } from "@/lib/posts"
+import BlogPostLoading from "./loading"
 
 // This type works at runtime but conflicts with Next.js internal types
 interface PageProps {
@@ -29,13 +31,21 @@ export async function generateMetadata(props: PageProps) {
   }
 }
 
-export default async function PostPage(props: PageProps) {
-  if (!props.params.slug) {
+export default async function PostPage({ params }: PageProps) {
+  if (!params.slug) {
     notFound()
   }
 
+  return (
+    <Suspense fallback={<BlogPostLoading />}>
+      <BlogPost slug={params.slug} />
+    </Suspense>
+  )
+}
+
+async function BlogPost({ slug }: { slug: string }) {
   try {
-    const post = await getPostBySlug(props.params.slug)
+    const post = await getPostBySlug(slug)
 
     // Replace literal \n with actual newlines
     const formattedContent = post.content.replace(/\\n/g, '\n')

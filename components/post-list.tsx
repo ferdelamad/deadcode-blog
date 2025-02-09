@@ -1,5 +1,8 @@
-import Link from "next/link"
+"use client"
+
 import type { Post } from "@/lib/types"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 interface PostListProps {
   posts: Post[]
@@ -7,10 +10,24 @@ interface PostListProps {
 }
 
 export const PostList = ({ posts, showCategory = true }: PostListProps) => {
+  const router = useRouter()
+  const [clickedId, setClickedId] = useState<string | null>(null)
+
+  const handlePostClick = (slug: string, id: string) => {
+    setClickedId(id)
+    router.push(`/blog/${slug}`)
+  }
+
   return (
     <div className="grid gap-10">
       {posts.map((post) => (
-        <article key={post.id} className="group relative flex flex-col space-y-2">
+        <article 
+          key={post.id} 
+          onClick={() => handlePostClick(post.slug, post.id)}
+          className={`group relative flex flex-col space-y-2 cursor-pointer transition-opacity ${
+            clickedId && clickedId !== post.id ? 'opacity-50' : ''
+          }`}
+        >
           {showCategory && (
             <div className="text-sm text-muted-foreground uppercase">
               {post.category}
@@ -35,9 +52,6 @@ export const PostList = ({ posts, showCategory = true }: PostListProps) => {
               </>
             )}
           </div>
-          <Link href={`/blog/${post.slug}`} className="absolute inset-0">
-            <span className="sr-only">View Article</span>
-          </Link>
         </article>
       ))}
     </div>
