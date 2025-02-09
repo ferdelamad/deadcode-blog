@@ -83,43 +83,81 @@ body {
   }
 
   .prose pre {
-    background-color: hsl(var(--muted));
+    background: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(var(--accent)) 100%);
     border: 1px solid hsl(var(--border));
-    border-radius: 0.5rem;
-    padding: 1rem;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
     overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
-  .prose code {
+  .prose code:not(pre code) {
     background-color: hsl(var(--muted));
     border-radius: 0.25rem;
     padding: 0.2em 0.4em;
     font-size: 0.875em;
+    font-weight: normal;
+    color: #EB5757;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .dark .prose code:not(pre code) {
+    color: #FF5757;
   }
 
   .prose pre code {
     background-color: transparent;
     border-radius: 0;
     padding: 0;
-    font-size: inherit;
+    border: none;
+    font-size: 0.875em;
+    line-height: 1.7;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    color: hsl(var(--foreground));
   }
 
-  .dark .prose {
-    --tw-prose-body: hsl(var(--foreground));
-    --tw-prose-headings: hsl(var(--foreground));
-    --tw-prose-links: hsl(var(--primary));
-    --tw-prose-bold: hsl(var(--foreground));
-    --tw-prose-counters: hsl(var(--muted-foreground));
-    --tw-prose-bullets: hsl(var(--muted-foreground));
-    --tw-prose-hr: hsl(var(--border));
-    --tw-prose-quotes: hsl(var(--foreground));
-    --tw-prose-quote-borders: hsl(var(--border));
-    --tw-prose-captions: hsl(var(--muted-foreground));
-    --tw-prose-code: hsl(var(--primary));
-    --tw-prose-pre-code: hsl(var(--muted-foreground));
-    --tw-prose-pre-bg: hsl(var(--muted));
-    --tw-prose-th-borders: hsl(var(--border));
-    --tw-prose-td-borders: hsl(var(--border));
+  /* Dark mode specific styles for code blocks */
+  .dark .prose pre {
+    background: linear-gradient(145deg, hsl(var(--muted)) 0%, hsl(var(--secondary)) 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .prose pre code {
+    color: hsl(var(--foreground));
+  }
+
+  /* Language label styling */
+  .prose pre[class*="language-"]::before {
+    content: attr(data-language);
+    display: block;
+    margin-bottom: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.75rem;
+  }
+
+  /* Syntax highlighting colors */
+  .prose pre code .keyword,
+  .prose pre code .function {
+    color: #FF5757;
+  }
+
+  .prose pre code .string {
+    color: #10B981;
+  }
+
+  .prose pre code .comment {
+    color: hsl(var(--muted-foreground));
+    font-style: italic;
+  }
+
+  .prose pre code .number {
+    color: #F59E0B;
   }
 }
 
