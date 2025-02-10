@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "A blog about AI, programming and technology",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      // { url: "/favicon.ico" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
     ],
   },
