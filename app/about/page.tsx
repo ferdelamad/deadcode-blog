@@ -14,33 +14,26 @@ export default function AboutPage() {
           
           <div className="prose dark:prose-invert">
             <p>
-              Hi, I'm Fernando Lamadrid, a software engineer passionate about building 
-              great web experiences. I created Dead Code as a place to share my 
-              knowledge and experiences in software development.
+              Hi, I'm Fernando De La Madrid, a software engineer driven by a passion for building and learning. 
+              I created Dead Code to share my knowledge, experiences, and insights on software and AI development.
             </p>
 
             <h2>What I Write About</h2>
             <ul>
+              <li>Machine Learning</li>
+              <li>AI Engineering Techniques</li>
               <li>React and Next.js development</li>
-              <li>TypeScript best practices</li>
+              <li>TypeScript and Python</li>
               <li>Software architecture and patterns</li>
               <li>Developer productivity and tools</li>
             </ul>
-
-            <h2>Why "Dead Code"?</h2>
-            <p>
-              Dead Code is a programming term for code that exists in the source but is 
-              never executed. This blog aims to help developers identify and eliminate 
-              inefficiencies in their code while building better, more maintainable 
-              applications.
-            </p>
 
             <h2>Get in Touch</h2>
             <p>
               Have questions or want to discuss something? Feel free to reach out to me 
               on{" "}
               <a 
-                href="https://twitter.com/yourusername" 
+                href="https://twitter.com/imdeadcode" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -48,7 +41,7 @@ export default function AboutPage() {
               </a>
               {" "}or{" "}
               <a 
-                href="https://github.com/yourusername" 
+                href="https://github.com/ferdelamad" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >

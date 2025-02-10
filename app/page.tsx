@@ -17,15 +17,19 @@ export default async function Home() {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Code2 className="h-4 w-4" />
-              <span>Software Development & Best Practices</span>
+              <span>AI, Code, & Personal Reflections</span>
             </div>
             <h3 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Hey, I'm Fernando 👋
+              Hey, I'm Fer 👋
             </h3>
             <p className="text-lg text-muted-foreground">
-              Welcome to Dead Code, where I write about software development, 
-              best practices, and my journey as a developer. I focus on React, 
-              TypeScript, and modern web development.
+              Welcome to the{" "}
+              <span className="font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent px-1">
+                Dead<span className="text-primary">Code</span>
+              </span>{" "}
+              blog, where I dive into the world of AI, software development, 
+              and my personal journey. I write about ML/AI Engineering, and modern web development, 
+              along with insights from my journey as a entrepreneur and developer.
             </p>
           </div>
 

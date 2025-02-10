@@ -50,12 +50,8 @@ async function BlogPost({ slug }: { slug: string }) {
     // Replace literal \n with actual newlines
     const formattedContent = post.content.replace(/\\n/g, '\n')
     
-    // Remove the first h1 header (title) from the content
-    const contentWithoutTitle = formattedContent
-      .split('\n')
-      .filter((line) => !line.startsWith('# '))
-      .join('\n')
-      .trim()
+    // Remove the title filtering - we want to keep the title in the content now
+    const contentWithoutTitle = formattedContent.trim()
 
     const components: Components = {
       h1: ({ children }) => (
